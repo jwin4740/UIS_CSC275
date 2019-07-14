@@ -150,15 +150,8 @@ public class Main {
         return value;
     }
 
-//    public static int dec2Hex(int value) {
-////
-////        return dec2Hex(value, 0);
-////    }
 
     public static String dec2Hex(int value) {
-//        StringBuilder sb = new StringBuilder(decString);
-//        String myChar = decString.substring(0, index + 1);
-
 
 
         int remainder = value % 16;
