@@ -17,6 +17,15 @@ public class MainTest {
 
     }
 
+//    @Test
+//    public void dec2Hex() {
+//        assertEquals("345", Main.dec2Hex(837));
+//        assertEquals("0", Main.dec2Hex(0));
+//
+//        assertEquals("FB45B", Main.dec2Hex(1029211));
+//
+//    }
+
 
 }
 

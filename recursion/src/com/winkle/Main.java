@@ -1,4 +1,5 @@
 /*
+https://beginnersbook.com/2014/07/java-program-to-convert-decimal-to-hexadecimal/
 Module - Code design and Implementation Assignment
         Once more only 1 choice to implement this module. Naming convention: Project name “surnameTask6,
         note only "T" in capital all else lowercase. This task must be implemented within a single file.
@@ -57,6 +58,8 @@ public class Main {
     static final int D = 13;
     static final int E = 14;
     static final int F = 15;
+    static final char hexArray[] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
+
     static final HashMap<Character, Integer> hexMap = new HashMap<>() {
         {
             put('A', 10);
@@ -139,7 +142,30 @@ public class Main {
         value = +adder + hex2Dec(hexString, newIndex);
 
 
-
         return value;
+    }
+
+//    public static int dec2Hex(int value) {
+////
+////        return dec2Hex(value, 0);
+////    }
+
+    public static int dec2Hex(int value) {
+//        StringBuilder sb = new StringBuilder(decString);
+//        String myChar = decString.substring(0, index + 1);
+        String str2 = "";
+        if (value == 0) {
+        }
+
+        int remainder = 0;
+
+        while (value > 0) {
+            remainder = value % 16;
+            str2 = hexArray[remainder] + str2;
+            value = value / 16;
+        }
+        System.out.println("Result: " + str2);
+
+        return hexArray[remainder] + dec2Hex(value);
     }
 }
