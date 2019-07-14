@@ -10,6 +10,7 @@ class DecimalToHexExample {
         System.out.print("Enter a decimal number : ");
         int num = input.nextInt();
 
+        // 10000 --> 2710
         // For storing remainder
         int rem;
 

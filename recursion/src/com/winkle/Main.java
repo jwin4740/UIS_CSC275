@@ -81,9 +81,14 @@ public class Main {
 //        String start = s.nextLine();
 //        int finalVal = bin2Dec(start);
 //        System.out.println(finalVal);
-        System.out.println("Enter a hex number:");
-        String start = s.nextLine();
-        int finalVal = hex2Dec(start);
+//        System.out.println("Enter a hex number:");
+//        String start = s.nextLine();
+//        int finalVal = hex2Dec(start);
+
+
+        System.out.println("Enter a decimal number:");
+        int start = s.nextInt();
+        String finalVal = dec2Hex(start);
         System.out.println(finalVal);
     }
 
@@ -150,22 +155,19 @@ public class Main {
 ////        return dec2Hex(value, 0);
 ////    }
 
-    public static int dec2Hex(int value) {
+    public static String dec2Hex(int value) {
 //        StringBuilder sb = new StringBuilder(decString);
 //        String myChar = decString.substring(0, index + 1);
-        String str2 = "";
+
+
+
+        int remainder = value % 16;
+        value /= 16;
         if (value == 0) {
+            return String.valueOf(hexArray[remainder]);
         }
 
-        int remainder = 0;
 
-        while (value > 0) {
-            remainder = value % 16;
-            str2 = hexArray[remainder] + str2;
-            value = value / 16;
-        }
-        System.out.println("Result: " + str2);
-
-        return hexArray[remainder] + dec2Hex(value);
+        return dec2Hex(value) + hexArray[remainder];
     }
 }
