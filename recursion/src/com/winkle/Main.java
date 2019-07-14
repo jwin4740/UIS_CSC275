@@ -50,6 +50,7 @@ import java.util.Scanner;
 
 public class Main {
 
+
     public static void main(String[] args) {
 
         Scanner s = new Scanner(System.in);
@@ -71,15 +72,11 @@ public class Main {
     public static int bin2Dec(String binaryString, int index) {
         // length of binary string
         int leng = binaryString.length();
-        int value = 0;
+        int value;
         char character = binaryString.charAt(index);
 
         if (index == leng - 1) {
-            if (character == '1') {
-                return 1;
-            } else {
-                return 0;
-            }
+            return (character == '1') ? 1 : 0;
         }
 
 
