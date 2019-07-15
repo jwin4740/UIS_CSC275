@@ -2,6 +2,8 @@
 https://beginnersbook.com/2014/07/java-program-to-convert-decimal-to-hexadecimal/
 
 https://www.geeksforgeeks.org/write-a-c-program-to-print-all-permutations-of-a-given-string/ --> permutation
+https://www.techiedelight.com/generate-permutations-string-java-recursive-iterative/
+
 Module - Code design and Implementation Assignment
         Once more only 1 choice to implement this module. Naming convention: Project name “surnameTask6,
         note only "T" in capital all else lowercase. This task must be implemented within a single file.
@@ -72,7 +74,37 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Scanner s = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
+        boolean alive = true;
+        while (alive) {
+            System.out.println("Choose from the following methods to test or exit: ");
+            System.out.println("a) Convert binary to decimal\nb) Convert decimal to hex\nc) Convert hex to decimal\nd) List string permutations\ne) exit program");
+            switch (scanner.nextLine()) {
+                case ("a"):
+                    System.out.print("Enter a binary number: ");
+                    break;
+                case ("b"):
+                    System.out.print("Enter a decimal number: ");
+                case ("c"):
+                    System.out.print("Enter a hex number: ");
+                    break;
+                case ("d"):
+                    System.out.print("Enter a string: ");
+                    break;
+                case ("e"):
+                    System.out.print("...exiting program, goodbye!");
+                    break;
+                default:
+                    System.out.println("...exiting, please enter valid letter choice");
+            }
+
+            System.out.println("\n\nWould you like to exit the program (y/n): ");
+            if (scanner.nextLine().equals("y")) {
+                System.out.print("...exiting program, goodbye!");
+                alive = false;
+            }
+        }
+        scanner.close();
 
 //        System.out.println("Enter a binary number:");
 //        String start = s.nextLine();
@@ -82,76 +114,37 @@ public class Main {
 //        String start = s.nextLine();
 //        int finalVal = hex2Dec(start);
 
-
-        System.out.println("Enter a decimal number:");
-        int start = s.nextInt();
-        String finalVal = dec2Hex(start);
-        System.out.println(finalVal);
-        s.close();
-        String str = "ABC";
-        int n = str.length();
-
-        permute(str, 0, n - 1);
+//
+//        System.out.println("Enter a decimal number:");
+//        int start = s.nextInt();
+//        String finalVal = dec2Hex(start);
+//        System.out.println(finalVal);
+//        s.close();
+//        String str = "JSKDJ";
+//
+//
+//        displayPermutation(str);
     }
 
 
-    /**
-     * permutation function
-     *
-     * @param str string to calculate permutation for
-     * @param l   starting index
-     * @param r   end index
-     */
-    public static void permute(String str, int l, int r) {
-        if (l == r)
-            System.out.println(str);
-        else {
-            for (int i = l; i <= r; i++) {
-                str = swap(str, l, i);
-                permute(str, l + 1, r);
-                str = swap(str, l, i);
-            }
-        }
-    }
-
-    /**
-     * Swap Characters at position
-     *
-     * @param a string value
-     * @param i position 1
-     * @param j position 2
-     * @return swapped string
-     */
-    public static String swap(String a, int i, int j) {
-        char temp;
-        char[] charArray = a.toCharArray();
-        temp = charArray[i];
-        charArray[i] = charArray[j];
-        charArray[j] = temp;
-        return String.valueOf(charArray);
-    }
-
-   /* Write a recursive method to print all the permutations of a string. For example, for the string abc,
-    the permutation is:
-            . abc
-            . acb
-            . bac
-            . bca
-            . cab
-            . cba
-    Define the following two methods. The second is a helper method.
-            . public static void displayPermutation(String s)
-        . public static void displayPermutation(String s1, String s2)
-    The first method simply invokes displayPermutation(“ ”, s). The second method uses a loop to move a
-    character from s2 to s1 and recursively invokes it with a new s1 and s2. The base case is that s2 is empty
-    and prints s1 to the console.
-
-    */
     public static void displayPermutation(String s) {
+        displayPermutation("", s);
 
     }
 
     public static void displayPermutation(String s1, String s2) {
+
+        //base case
+        if (s2.isEmpty()) {
+            System.out.println(s1);
+        }
+        for (int i = 0; i <= s2.length() - 1; i++) {
+            String newS1 = s1 + s2.charAt(i);
+            String newS2 = s2.substring(0, i) +
+                    s2.substring(i + 1);
+            displayPermutation(newS1, newS2);
+
+        }
 
     }
 
