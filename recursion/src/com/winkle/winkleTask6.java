@@ -1,52 +1,21 @@
 /*
-https://beginnersbook.com/2014/07/java-program-to-convert-decimal-to-hexadecimal/
+I declare that all material in this assessment task is my own work except where there is clear acknowl-
+edgement or reference to the work of others. I further declare that I have complied with, and agree to
+abide by, the UIS Academic Integrity Policy at the University website. http://www.uis.edu/academicintegrity
+Author’s Name: James J Winkle UID: 652613763 Date: 07/14/2019
 
-https://www.geeksforgeeks.org/write-a-c-program-to-print-all-permutations-of-a-given-string/ --> permutation
-https://www.techiedelight.com/generate-permutations-string-java-recursive-iterative/
+In the following link:
+https://beginnersbook.com/2014/07/java-program-to-convert-decimal-to-hexadecimal/ --> I got the idea of construction an array
+of characters 0-9 and a-f so that there indexes matched according to their values. The link also helped me with constructing
+logic to kick up the first recursive call and dividing by 16
 
-Module - Code design and Implementation Assignment
-        Once more only 1 choice to implement this module. Naming convention: Project name “surnameTask6,
-        note only "T" in capital all else lowercase. This task must be implemented within a single file.
-        Conversions:
-        Decimal to hex, Binary to Decimal, Hex to Decimal, and String permutation:
-        Write a recursive method that converts a decimal number into a hex number as a string. The method
-        header is:
-        . public static String dec2Hex(int value)
-        Write a recursive method that parses a binary number as a string into a decimal integer. The method
-        header is:
+The following links were helpful for me in solving the permutation method:
+https://www.geeksforgeeks.org/write-a-c-program-to-print-all-permutations-of-a-given-string/ --> gave me some good background on
+how a backtracking algorithm works
 
-        . public static int hex2Dec(String hexString)
-        Write a recursive method to print all the permutations of a string. For example, for the string abc,
-        the permutation is:
-        . abc
-        . acb
-        . bac
-        . bca
-        . cab
-        . cba
-        Define the following two methods. The second is a helper method.
-        . public static void displayPermutation(String s)
-        . public static void displayPermutation(String s1, String s2)
-        The first method simply invokes displayPermutation(“ ”, s). The second method uses a loop to move a
-        character from s2 to s1 and recursively invokes it with a new s1 and s2. The base case is that s2 is empty
-        and prints s1 to the console.
-        1
-        Write a menu driven test program that prompts the user to choose which of your methods to test
-        out or to exit. The user is then to enter his/her choice:
-        1. In the case of string permutation they enter a string and the program displays all its permutations,
-        then returns to the menu.
-        2. In the case of the hex the user enters a hex string and the program displays its decimal equivalent,
-        then returns to the menu.
-        3. In the case of the binary the user to enters a binary string and the program displays its decimal
-        equivalent, then returns to the menu.
-        4. In the case of the decimal the user to enters a decimal number and the program displays its hex
-        equivalent, then returns to the menu.
-        5. Boundary, recursive programs can quickly get out of hand complexity wise, Prompt the user at
-        the start of your program to set an upper bound on input size, warm them of time delay in case
-        of large inputs (say greater than 6 digits or chars).
-        6. In the case of exit, display how much time elapsed and the number of recursive calls per function requested
-        (bonus 1 point), then the program is to exit without leaking any resources...
-        */
+https://www.techiedelight.com/generate-permutations-string-java-recursive-iterative/ --> introduced me to the idea of using the
+substring method to form new strings to pipe into my recursive calls
+*/
 
 
 package com.winkle;
@@ -54,9 +23,11 @@ package com.winkle;
 import java.util.HashMap;
 import java.util.Scanner;
 
-public class Main {
-
+public class winkleTask6 {
+    // char array of hex characters
     static final char hexArray[] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'};
+
+    // hashmap used to represent hex characters to numbers
     static final HashMap<Character, Integer> hexMap = new HashMap<Character, Integer>() {
         {
             put('a', 10);
@@ -115,15 +86,13 @@ public class Main {
 
     }
 
-    //    Write a recursive method that parses a hex number as a string into a decimal integer
+
     public static int hex2Dec(String hexString) {
 
         return hex2Dec(hexString, 0);
     }
 
     public static int hex2Dec(String hexString, int index) {
-//        StringBuilder sb = new StringBuilder(hexString);
-//        String myChar = hexString.substring(0, index + 1);
         int leng = hexString.length();
         int value;
         int val;
@@ -144,22 +113,16 @@ public class Main {
         int adder = val > 0 ? val * ((int) Math.pow(16, leng - index - 1)) : 0;
         int newIndex = index + 1;
         value = +adder + hex2Dec(hexString, newIndex);
-
-
         return value;
     }
 
 
     public static String dec2Hex(int value) {
-
-
         int remainder = value % 16;
         value /= 16;
         if (value == 0) {
             return String.valueOf(hexArray[remainder]);
         }
-
-
         return dec2Hex(value) + hexArray[remainder];
     }
 
@@ -204,10 +167,10 @@ public class Main {
 
                     break;
                 case ("d"):
-                    System.out.print("Enter a string (please no longer than 6 letters long): ");
+                    System.out.print("Enter a string (please no longer than 8 letters long because it may take too much time and use too much cpu): ");
                     String userString = scanner.nextLine();
-                    if (!userString.matches("[a-zA-Z]*")) {
-                        System.out.println("ERROR --> your string must contain only letters");
+                    if (!userString.matches("[a-zA-Z]*") || userString.length() > 8) {
+                        System.out.println("ERROR --> your string must contain only letters and/or less than 9 characters");
                         break;
                     }
                     System.out.println("The following are the permutations of your string given:");
@@ -228,23 +191,5 @@ public class Main {
         }
         scanner.close();
 
-//        System.out.println("Enter a binary number:");
-//        String start = s.nextLine();
-//        int finalVal = bin2Dec(start);
-//        System.out.println(finalVal);
-//        System.out.println("Enter a hex number:");
-//        String start = s.nextLine();
-//        int finalVal = hex2Dec(start);
-
-//
-//        System.out.println("Enter a decimal number:");
-//        int start = s.nextInt();
-//        String finalVal = dec2Hex(start);
-//        System.out.println(finalVal);
-//        s.close();
-//        String str = "JSKDJ";
-//
-//
-//        displayPermutation(str);
     }
 }
