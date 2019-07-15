@@ -57,16 +57,16 @@ import java.util.Scanner;
 public class Main {
 
 
-    static final char hexArray[] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
+    static final char hexArray[] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'};
 
     static final HashMap<Character, Integer> hexMap = new HashMap<Character, Integer>() {
         {
-            put('A', 10);
-            put('B', 11);
-            put('C', 12);
-            put('D', 13);
-            put('E', 14);
-            put('F', 15);
+            put('a', 10);
+            put('b', 11);
+            put('c', 12);
+            put('d', 13);
+            put('e', 14);
+            put('f', 15);
         }
     };
     static int hexLength = 0;
@@ -77,19 +77,49 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         boolean alive = true;
         while (alive) {
-            System.out.println("Choose from the following methods to test or exit: ");
+            System.out.println("\nChoose from the following methods to test or exit: ");
             System.out.println("a) Convert binary to decimal\nb) Convert decimal to hex\nc) Convert hex to decimal\nd) List string permutations\ne) exit program");
             switch (scanner.nextLine()) {
                 case ("a"):
                     System.out.print("Enter a binary number: ");
+                    String start = scanner.nextLine();
+                    if (!start.matches("[0-1]*")) {
+                        System.out.println("ERROR --> must have only 0 or 1");
+                        break;
+                    }
+
+                    System.out.println("Your converted value is: " + bin2Dec(start));
                     break;
                 case ("b"):
                     System.out.print("Enter a decimal number: ");
+
+                    String value = scanner.nextLine();
+                    if (!value.matches("[0-9]*")) {
+                        System.out.println("ERROR --> must have only numbers");
+                        break;
+                    }
+                    System.out.println("Your converted value is: " + dec2Hex(Integer.parseInt(value)));
+                    break;
+
                 case ("c"):
                     System.out.print("Enter a hex number: ");
+
+                    String hexString = scanner.nextLine();
+                    if (!hexString.matches("[0-9a-f]*")) {
+                        System.out.println("ERROR --> must have only numbers and/or characters \'a\' through \'f\'");
+                        break;
+                    }
+
                     break;
                 case ("d"):
-                    System.out.print("Enter a string: ");
+                    System.out.print("Enter a string (please no longer than 6 letters long): ");
+                    String userString = scanner.nextLine();
+                    if (!userString.matches("[a-zA-Z]*")) {
+                        System.out.println("ERROR --> your string must contain only letters");
+                        break;
+                    }
+                    System.out.println("The following are the permutations of your string given:");
+                    displayPermutation(userString);
                     break;
                 case ("e"):
                     System.out.print("...exiting program, goodbye!");
@@ -186,6 +216,7 @@ public class Main {
         int value;
         int val;
         char currentCharacter = hexString.charAt(index);
+
         if (Character.isLetter(currentCharacter)) {
             val = hexMap.get(currentCharacter);
         } else {
