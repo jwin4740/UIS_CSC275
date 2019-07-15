@@ -1,5 +1,7 @@
 /*
 https://beginnersbook.com/2014/07/java-program-to-convert-decimal-to-hexadecimal/
+
+https://www.geeksforgeeks.org/write-a-c-program-to-print-all-permutations-of-a-given-string/ --> permutation
 Module - Code design and Implementation Assignment
         Once more only 1 choice to implement this module. Naming convention: Project name “surnameTask6,
         note only "T" in capital all else lowercase. This task must be implemented within a single file.
@@ -52,15 +54,10 @@ import java.util.Scanner;
 
 public class Main {
 
-    static final int A = 10;
-    static final int B = 11;
-    static final int C = 12;
-    static final int D = 13;
-    static final int E = 14;
-    static final int F = 15;
+
     static final char hexArray[] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
 
-    static final HashMap<Character, Integer> hexMap = new HashMap<>() {
+    static final HashMap<Character, Integer> hexMap = new HashMap<Character, Integer>() {
         {
             put('A', 10);
             put('B', 11);
@@ -90,6 +87,72 @@ public class Main {
         int start = s.nextInt();
         String finalVal = dec2Hex(start);
         System.out.println(finalVal);
+        s.close();
+        String str = "ABC";
+        int n = str.length();
+
+        permute(str, 0, n - 1);
+    }
+
+
+    /**
+     * permutation function
+     *
+     * @param str string to calculate permutation for
+     * @param l   starting index
+     * @param r   end index
+     */
+    public static void permute(String str, int l, int r) {
+        if (l == r)
+            System.out.println(str);
+        else {
+            for (int i = l; i <= r; i++) {
+                str = swap(str, l, i);
+                permute(str, l + 1, r);
+                str = swap(str, l, i);
+            }
+        }
+    }
+
+    /**
+     * Swap Characters at position
+     *
+     * @param a string value
+     * @param i position 1
+     * @param j position 2
+     * @return swapped string
+     */
+    public static String swap(String a, int i, int j) {
+        char temp;
+        char[] charArray = a.toCharArray();
+        temp = charArray[i];
+        charArray[i] = charArray[j];
+        charArray[j] = temp;
+        return String.valueOf(charArray);
+    }
+
+   /* Write a recursive method to print all the permutations of a string. For example, for the string abc,
+    the permutation is:
+            . abc
+            . acb
+            . bac
+            . bca
+            . cab
+            . cba
+    Define the following two methods. The second is a helper method.
+            . public static void displayPermutation(String s)
+        . public static void displayPermutation(String s1, String s2)
+    The first method simply invokes displayPermutation(“ ”, s). The second method uses a loop to move a
+    character from s2 to s1 and recursively invokes it with a new s1 and s2. The base case is that s2 is empty
+    and prints s1 to the console.
+
+    */
+    public static void displayPermutation(String s) {
+
+    }
+
+    public static void displayPermutation(String s1, String s2) {
+
     }
 
 
